@@ -1,2 +1,3 @@
-# .Net5Template
-.Net5 Template(Use Castle.Windsor for DI)
+# .Net5-Example
+
+.Net5-Example(Use Castle.Windsor for DI)
