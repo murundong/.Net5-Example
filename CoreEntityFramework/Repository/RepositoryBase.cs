@@ -22,7 +22,9 @@ namespace CoreEntityFramework.Repository
         }
         public virtual TDbContext _dbContext => _dbContextProvider.GetDbContext();
         public virtual DbSet<TEntity> Table => _dbContext.Set<TEntity>();
-        
+
+        public TDbContext dbContext => _dbContext;
+
         protected virtual void AttachIfNot(TEntity entity)
         {
             if (!Table.Local.Contains(entity))

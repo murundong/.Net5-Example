@@ -11,6 +11,9 @@ namespace CoreEntityFramework.Repository
     public interface IRepository<TDbContext,TEntity> where TEntity:class
         where TDbContext:DbContext
     {
+
+        TDbContext dbContext { get; }
+
         #region Select/Get/Query
 
         IQueryable<TEntity> GetAll();
