@@ -37,6 +37,9 @@ namespace CoreWeb.Test
             services.AddDbContextPool<App_DbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("default")))
                 .AddTransient(typeof(App_DbContext));
 
+
+            services.AddSingleton<IWindsorContainer, WindsorContainer>();
+
             //EFcore 3.0 以上不支持sqlserver2008，可降低efcore版本以解决
             //services.AddDbContextPool<App_DbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("default")
             //    , s => s.UseRowNumberForPaging()))

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CoreEntityFramework.DbContextProvider;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +11,12 @@ namespace CoreEntityFramework.Uow
     public class UnitOfWork<TDbContext> : IUnitOfWork<TDbContext>
       where TDbContext : DbContext
     {
-        private TDbContext _dbContext;
-        public UnitOfWork(TDbContext dbContext)
+        private IDbContextProvider<TDbContext> _dbContextProvider;
+        public UnitOfWork(IDbContextProvider<TDbContext> dbContextProvider)
         {
-            _dbContext = dbContext;
+            _dbContextProvider = dbContextProvider;
         }
-
+        public virtual TDbContext _dbContext => _dbContextProvider.GetDbContext();
         public bool HasChanges()
         {
             return _dbContext.ChangeTracker.HasChanges();

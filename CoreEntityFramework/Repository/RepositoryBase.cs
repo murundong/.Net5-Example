@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CoreEntityFramework.DbContextProvider;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +13,14 @@ namespace CoreEntityFramework.Repository
          where TEntity : class
          where TDbContext : DbContext
     {
-        private TDbContext _dbContext;
+        private IDbContextProvider<TDbContext> _dbContextProvider;
 
 
-        public RepositoryBase(TDbContext dbContext) 
+        public RepositoryBase(IDbContextProvider<TDbContext> dbContextProvider) 
         {
-            _dbContext = dbContext;
+            _dbContextProvider = dbContextProvider;
         }
-
+        public virtual TDbContext _dbContext => _dbContextProvider.GetDbContext();
         public virtual DbSet<TEntity> Table => _dbContext.Set<TEntity>();
         
         protected virtual void AttachIfNot(TEntity entity)

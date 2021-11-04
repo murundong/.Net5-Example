@@ -11,6 +11,7 @@ namespace CoreIocManager
     {
         public void Configure(WindsorContainer container)
         {
+            container.Install(new IDbContextProviderInstaller());
             container.Install(new IRepositoryInstaller());
             container.Install(new IApplicationServiceInstaller());
             container.Install(new IUofInstaller());

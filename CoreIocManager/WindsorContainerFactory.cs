@@ -15,13 +15,16 @@ namespace CoreIocManager
     /// </summary>
     public class WindsorContainerFactory : IServiceProviderFactory<IServiceCollection>
     {
-        private WindsorContainer container;
+        //private WindsorContainer container;
+        private IWindsorContainer _container;
         private IServiceCollection services;
 
-        public WindsorContainerFactory(IWindsorContainerModule containerModule)
+        public WindsorContainerFactory(IWindsorContainerModule containerModule, IWindsorContainer container)
         {
-            container = new WindsorContainer();
-            containerModule.Configure(container);
+            //container = new WindsorContainer();
+            //containerModule.Configure(container);
+            _container = container;
+            containerModule.Configure(_container as WindsorContainer);
         }
 
         public IServiceCollection CreateBuilder(IServiceCollection services)
@@ -32,7 +35,8 @@ namespace CoreIocManager
 
         public IServiceProvider CreateServiceProvider(IServiceCollection containerBuilder)
         {
-            return WindsorRegistrationHelper.CreateServiceProvider(container, services);
+            //return WindsorRegistrationHelper.CreateServiceProvider(container, services);
+            return WindsorRegistrationHelper.CreateServiceProvider(_container, services);
         }
     }
 }

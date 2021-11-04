@@ -1,4 +1,5 @@
-﻿using CoreIocManager;
+﻿using Castle.Windsor;
+using CoreIocManager;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -15,7 +16,7 @@ namespace CoreWeb.Test
             where TWindsorContainerModule:class, IWindsorContainerModule
         {
             return hostBuilder
-                .UseServiceProviderFactory(new WindsorContainerFactory(containerModule))
+                .UseServiceProviderFactory(new WindsorContainerFactory(containerModule, new WindsorContainer()))
                 .ConfigureServices(service =>
                 {
                     service.AddSingleton<IWindsorContainerModule, TWindsorContainerModule>();
