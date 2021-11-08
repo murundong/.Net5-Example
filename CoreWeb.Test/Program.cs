@@ -21,6 +21,7 @@ namespace CoreWeb.Test
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .UserWindsorContainer(new WindsorContainerModule())
+                .ConfigureLogging(logging => { logging.AddLog4Net("log4net.config"); })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
