@@ -46,7 +46,10 @@ namespace CoreWeb.Test
             //    .AddTransient(typeof(App_DbContext));
 
             //services.AddRazorPages();
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(options=>
+            {
+                options.JsonSerializerOptions.IncludeFields = true;
+            });
             
             services.AddAutoMapper(typeof(MapperConfigProfile));
 
