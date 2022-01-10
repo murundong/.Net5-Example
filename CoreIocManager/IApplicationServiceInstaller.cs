@@ -16,7 +16,7 @@ namespace CoreIocManager
         {
             container.Register(
                 Classes.FromAssembly(typeof(IApplicationService).Assembly)
-                 .BasedOn<IApplicationService>()
+                 .BasedOn<IApplicationService>().LifestyleTransient()
                  .WithService.DefaultInterfaces()
                  );
         }

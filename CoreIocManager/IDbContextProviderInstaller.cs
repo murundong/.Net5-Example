@@ -17,6 +17,7 @@ namespace CoreIocManager
             container.Register(
                 Component.For(typeof(IDbContextProvider<>))
                 .ImplementedBy(typeof(DbContextProvider<>))
+                .LifestyleTransient()
                 );
         }
     }
